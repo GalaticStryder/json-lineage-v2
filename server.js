@@ -3,10 +3,18 @@ var bodyParser = require("body-parser");
 var mongodb = require("mongodb");
 var ObjectID = mongodb.ObjectID;
 
+const rewriter = require("./rewriter");
+const rewriterRules = {
+  '/devices': '/api/devices',
+  '/devices/:id': '/api/devices/:id'
+}
+
 var DEVICES_COLLECTION = "devices";
 
 var app = express();
 app.use(bodyParser.json());
+
+app.use(rewriter(rewriterRules));
 
 // Create a link to the Angular build directory.
 var distDir = __dirname + "/dist/";
