@@ -41,11 +41,10 @@ function handleError(res, reason, message, code) {
  *    GET: finds all devices
  *    POST: creates a new device
  */
-
 app.get("/api/devices", function(req, res) {
   db.collection(DEVICES_COLLECTION).find({}).toArray(function(err, docs) {
     if (err) {
-      handleError(res, err.message, "Failed to get contacts.");
+      handleError(res, err.message, "Failed to get devices.");
     } else {
       res.status(200).json(docs);
     }
@@ -57,7 +56,7 @@ app.post("/api/devices", function(req, res) {
   newDevice.createDate = new Date();
 
   if (!req.body.name) {
-    handleError(res, "Invalid device name input", "Must provide a device name.", 400);
+    handleError(res, "Invalid device name input.", "You must provide a device name.", 400);
   }
 
   db.collection(DEVICES_COLLECTION).insertOne(newDevice, function(err, doc) {
@@ -74,12 +73,36 @@ app.post("/api/devices", function(req, res) {
  *    PUT: updates device by id
  *    DELETE: deletes device by id
  */
-
 app.get("/api/devices/:id", function(req, res) {
+  db.collection(DEVICES_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to get device id.");
+    } else {
+      res.status(200).json(doc);
+    }
+  });
 });
 
 app.put("/api/devices/:id", function(req, res) {
+  var updateDoc = req.body;
+  delete updateDoc._id;
+
+  db.collection(DEVICES_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, updateDoc, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to update device.");
+    } else {
+      updateDoc._id = req.params.id;
+      res.status(200).json(updateDoc);
+    }
+  });
 });
 
-app.delete("/api/contacts/:id", function(req, res) {
+app.delete("/api/devices/:id", function(req, res) {
+  db.collection(DEVICES_COLLECTION).deleteOne({_id: new ObjectID(req.params.id)}, function(err, result) {
+    if (err) {
+      handleError(res, err.message, "Failed to delete device.");
+    } else {
+      res.status(200).json(req.params.id);
+    }
+  });
 });

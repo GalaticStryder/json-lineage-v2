@@ -3,11 +3,15 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
+import { DeviceInformationComponent } from './devices/device-information/device-information.component';
+import { DeviceListComponent } from './devices/device-list/device-list.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DeviceInformationComponent,
+    DeviceListComponent
   ],
   imports: [
     BrowserModule

@@ -1,0 +1,45 @@
+<div *ngIf="device" class="row">
+  <div class="col-md-12">
+    <h2 *ngIf="device._id">Device Information</h2>
+    <h2 *ngIf="!device._id">New Device</h2>
+  </div>
+</div>
+<div *ngIf="device" class="row">
+  <form class="col-md-12">
+    <div class="form-group">
+      <label for="device-name">Name</label>
+      <input class="form-control" name="device-name" [(ngModel)]="device.name" placeholder="Name"/>
+    </div>
+    <div class="form-group">
+      <label for="device-supported">Supported</label>
+      <input class="form-control" name="device-supported" [(ngModel)]="device.supported" placeholder="true"/>
+    </div>
+    <div class="form-group">
+      <label for="device-updates-datetime">Date/Time</label>
+      <input class="form-control" name="device-updates-datetime" [(ngModel)]="device.updates.datetime" placeholder="1230764400"/>
+    </div>
+    <div class="form-group">
+      <label for="device-updates-filename">File Name</label>
+      <input class="form-control" name="device-updates-filename" [(ngModel)]="device.updates.filename" placeholder="ota-package.zip"/>
+    </div>
+    <div class="form-group">
+      <label for="device-updates-romtype">ROM Type</label>
+      <input class="form-control" name="device-updates-romtype" [(ngModel)]="device.updates.romtype" placeholder="nightly"/>
+    </div>
+    <div class="form-group">
+      <label for="device-updates-size">Update Size</label>
+      <input class="form-control" name="device-updates-size" [(ngModel)]="device.updates.size" placeholder="314572800"/>
+    </div>
+    <div class="form-group">
+      <label for="device-updates-url">Update URL</label>
+      <input class="form-control" name="device-updates-url" [(ngModel)]="device.updates.url" placeholder="https://example.com/ota-package.zip"/>
+    </div>
+    <div class="form-group">
+      <label for="device-updates-version">Version</label>
+      <input class="form-control" name="device-updates-version" [(ngModel)]="device.updates.version" placeholder="15.1"/>
+    </div>
+    <button class="btn btn-primary" *ngIf="!device._id" (click)="createDevice(device)">Create</button>
+    <button class="btn btn-info" *ngIf="device._id" (click)="updateDevice(device)">Update</button>
+    <button class="btn btn-danger" *ngIf="device._id" (click)="deleteDevice(device._id)">Delete</button>
+  </form>
+</div>
