@@ -1,4 +1,8 @@
 // cURL Devices-API Documentation
+// TODO:
+// - Create `codename` driven API to integrate with Updater app.
+// - Implement UI to edit `updates` information with serialization option.
+// - Implement login framework with passport auth.
 
 // General Devices-API usage at node:
 // @="${url}/api/devices"
@@ -8,6 +12,9 @@ Command: -X GET @
 
 - Creating a new device in the database (with blank updates object):
 Command: -X POST -d '{"name":"Le Pro3","codename":"zl1","supported":"true","updates":[{"id":"","datetime":"","filename":"","romtype":"","size":"","url":"","version":""}]}' @
+
+- Creating a new device in the database (with complete updates object):
+Command: -X POST -d '{"name":"Le Max2","codename":"x2","supported":"true","updates":[{"id":"606a526693f48c161f628a3b84280b90ca4152cc","datetime":"1524274014","filename":"","romtype":"unofficial","size":"630","url":"https://github.com/GalaticStryder/lineage_releases/releases/download/dev/lineage-15.1-20180421-UNOFFICIAL-x2.zip","version":"15.1"}]}' @
 
 // Specific Devices-API usage at ID node:
 // @="${url}/api/devices/${id}"
