@@ -1,0 +1,31 @@
+// cURL Devices-API Documentation
+
+// General Devices-API usage at node:
+// @="${url}/api/devices"
+
+- Getting all the devices in the database.
+Command: -X GET @
+
+- Creating a new device in the database (with blank updates object):
+Command: -X POST -d '{"name":"Le Pro3","codename":"zl1","supported":"true","updates":[{"id":"","datetime":"","filename":"","romtype":"","size":"","url":"","version":""}]}' @
+
+// Specific Devices-API usage at ID node:
+// @="${url}/api/devices/${id}"
+
+- Getting all information for a given device ID in the database.
+Command: -X GET @
+
+- Adding a new object with property values.
+Command: -X POST -d '{"properties":{"display":"0","mdss_fb":"fb0"}}' @
+
+- Replacing an object with new property values.
+Command: -X PUT -d '{"properties":{"display":"1","mdss_fb":"fb1"}}' @
+
+- Adding a new UPDATE: adds a new update on top of the current one.
+Command: -X POST -d '{"updates":{"id":"0","datetime":"","filename":"","romtype":"","size":"","url":"","version":""}}' @
+
+- Replacing with an UPDATE: replaces the current update with a new one, it will be the LATEST one.
+Command: -X PUT -d '{"updates":[{"id":"0","datetime":"","filename":"","romtype":"","size":"","url":"","version":""}]}' @
+
+- Deleting a given device ID in the database.
+Command: -X DELETE @

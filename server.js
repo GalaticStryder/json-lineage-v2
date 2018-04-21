@@ -81,9 +81,10 @@ app.post("/api/devices", function(req, res) {
 });
 
 /*  "/api/devices/:id"
- *    GET: finds device by id
- *    PUT: updates device by id
- *    DELETE: deletes device by id
+ *    GET: finds device via `id`
+ *    POST: updates device db (by adding with $push) via `id`
+ *    PUT: updates device db (by replacing with $set) via `id`
+ *    DELETE: deletes device by `id`
  */
 app.get("/api/devices/:id", function(req, res) {
   db.collection(DEVICES_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, doc) {
@@ -91,6 +92,20 @@ app.get("/api/devices/:id", function(req, res) {
       handleError(res, err.message, "Failed to get device id.");
     } else {
       res.status(200).json(doc);
+    }
+  });
+});
+
+app.post("/api/devices/:id", function(req, res) {
+  var updateDoc = req.body;
+  delete updateDoc._id;
+
+  db.collection(DEVICES_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, { $push: updateDoc }, function(err, doc) {
+    if (err) {
+      handleError(res, err.message, "Failed to update device.");
+    } else {
+      updateDoc._id = req.params.id;
+      res.status(200).json(updateDoc);
     }
   });
 });
