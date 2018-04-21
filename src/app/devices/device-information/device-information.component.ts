@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Device } from '../device';
 import { DeviceService } from '../device.service';
 
@@ -19,7 +19,7 @@ export class DeviceInformationComponent {
   @Input()
   deleteHandler: Function;
 
-  constructor(private contactService: ContactService) { }
+  constructor(private deviceService: DeviceService) { }
 
   createDevice(device: Device) {
     this.deviceService.createDevice(device).then((newDevice: Device) => {
