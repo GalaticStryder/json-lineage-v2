@@ -2,7 +2,6 @@ export class Device {
   _id?: string;
   name: string;
   codename: string;
-  supported: string;
   updates: [
     {
       id: string;

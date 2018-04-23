@@ -53,7 +53,6 @@ export class DeviceListComponent implements OnInit {
     var device: Device = {
       name: '',
       codename: '',
-      supported: '',
       updates: [
         {
           id: '',

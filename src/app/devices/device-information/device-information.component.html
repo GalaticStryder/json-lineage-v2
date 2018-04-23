@@ -14,10 +14,6 @@
       <label for="device-codename">Codename</label>
       <input class="form-control" name="device-codename" [(ngModel)]="device.codename" placeholder="Codename"/>
     </div>
-    <div class="form-group">
-      <label for="device-supported">Supported</label>
-      <input class="form-control" name="device-supported" [(ngModel)]="device.supported" placeholder="true"/>
-    </div>
     <button class="btn btn-primary" *ngIf="!device._id" (click)="createDevice(device)">Create</button>
     <button class="btn btn-info" *ngIf="device._id" (click)="updateDevice(device)">Update</button>
     <button class="btn btn-danger" *ngIf="device._id" (click)="deleteDevice(device._id)">Delete</button>
