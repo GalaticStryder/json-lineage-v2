@@ -37,6 +37,13 @@ function handleError(res, reason, message, code) {
 
 /* The following lines apply to devices API routes. */
 
+/*  "/api"
+ *    GET: redirects to initial page
+ */
+app.get('/api', function(req, res) {
+  res.redirect('/');
+});
+
 /*  "/api/devices"
  *    GET: finds all devices
  *    POST: creates a new device
