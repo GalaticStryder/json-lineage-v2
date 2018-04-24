@@ -1,11 +1,11 @@
 <div *ngIf="device" class="row">
-  <div class="col-md-12">
+  <div class="col s12">
     <h2 *ngIf="device._id">Device Information</h2>
     <h2 *ngIf="!device._id">New Device</h2>
   </div>
 </div>
 <div *ngIf="device" class="row">
-  <form class="col-md-12">
+  <form class="col s12">
     <div class="form-group">
       <label for="device-name">Name</label>
       <input class="form-control" name="device-name" [(ngModel)]="device.name" placeholder="Name"/>
@@ -14,8 +14,8 @@
       <label for="device-codename">Codename</label>
       <input class="form-control" name="device-codename" [(ngModel)]="device.codename" placeholder="Codename"/>
     </div>
-    <button class="btn btn-primary" *ngIf="!device._id" (click)="createDevice(device)">Create</button>
-    <button class="btn btn-info" *ngIf="device._id" (click)="updateDevice(device)">Update</button>
-    <button class="btn btn-danger" *ngIf="device._id" (click)="deleteDevice(device._id)">Delete</button>
+    <button class="waves-effect waves-light btn" *ngIf="!device._id" (click)="createDevice(device)">Create</button>
+    <button class="waves-effect waves-light btn" *ngIf="device._id" (click)="updateDevice(device)">Update</button>
+    <button class="waves-effect waves-light btn" *ngIf="device._id" (click)="deleteDevice(device._id)">Delete</button>
   </form>
 </div>
