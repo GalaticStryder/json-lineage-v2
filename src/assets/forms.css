@@ -1,0 +1,17 @@
+/* Valid: Turquoise Green */
+.ng-valid[required], .ng-valid.required  {
+  border-bottom: 1px solid #69f0ae;
+  box-shadow: 0 1px 0 0 #69f0ae;
+}
+
+/* Invalid: Bloody Red */
+.ng-invalid[required], .ng-invalid.required  {
+  border-bottom: 1px solid #c62828;
+  box-shadow: 0 1px 0 0 #c62828;
+}
+
+/* Untouched: Default Teal */
+.ng-untouched[required], .ng-untouched.required  {
+  border-bottom: 1px solid #009688;
+  box-shadow: 0 1px 0 0 #009688;
+}
