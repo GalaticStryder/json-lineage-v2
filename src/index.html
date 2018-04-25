@@ -8,10 +8,25 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="assets/forms.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <link rel="stylesheet" href="assets/forms.css">
+  <link rel="stylesheet" href="assets/navbar.css">
 </head>
 <body>
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo center">
+          <img src="/res/materialize.svg">
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/api/devices">Devices API</a></li>
+          <li><a href="/res/DOCUMENTATION.txt">Documentation</a></li>
+          <li><a href="https://github.com/GalaticStryder/json-lineage-v2">Github</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
   <app-root></app-root>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 </body>

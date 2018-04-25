@@ -8,19 +8,26 @@
   <form class="col s12">
     <div class="form-group">
       <label for="device-name">Name</label>
-      <input class="form-control" name="device-name" [(ngModel)]="device.name" placeholder="Name" required #name="ngModel"/>
-      <div [hidden]="name.valid || name.pristine"
-           class="alert alert-danger">
-        <i>Name is required!</i>
+      <input class="form-control" name="device-name" [(ngModel)]="device.name" placeholder="Name" required/>
+      <div class="chip">
+        <b>Required</b>
+        <i class="close material-icons">close</i>
       </div>
     </div>
     <div class="form-group">
       <label for="device-codename">Codename</label>
       <input class="form-control" name="device-codename" [(ngModel)]="device.codename" placeholder="Codename" required/>
+      <div class="chip">
+        <b>Required</b>
+        <i class="close material-icons">close</i>
+      </div>
+      <div class="chip">
+        <b>Unique</b>
+        <i class="close material-icons">star_half</i>
+      </div>
     </div>
     <a class="waves-effect waves-light btn" *ngIf="!device._id" (click)="createDevice(device)"><i class="material-icons right">create</i>Create</a>
-    <a class="waves-effect waves-light btn" *ngIf="device._id" (click)="updateDevice(device)">Update</a>
-    <a class="waves-effect waves-light btn" *ngIf="device._id" (click)="deleteDevice(device._id)">Delete</a>
-    <a class="waves-effect waves-light btn red" *ngIf="!device._id" (click)="createDevice(device)"><i class="material-icons left">delete</i>Delete</a>
+    <a class="waves-effect waves-light btn" *ngIf="device._id" (click)="updateDevice(device)"><i class="material-icons right">refresh</i>Update</a>
+    <a class="waves-effect waves-light btn red" *ngIf="device._id" (click)="deleteDevice(device._id)"><i class="material-icons left">delete</i>Delete</a>
   </form>
 </div>
