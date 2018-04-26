@@ -6,13 +6,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { DeviceInformationComponent } from './devices/device-information/device-information.component';
 import { DeviceListComponent } from './devices/device-list/device-list.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DeviceInformationComponent,
-    DeviceListComponent
+    DeviceListComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
