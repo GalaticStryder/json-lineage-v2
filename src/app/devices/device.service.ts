@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Device } from './device';
+import { Device } from './data-model';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 

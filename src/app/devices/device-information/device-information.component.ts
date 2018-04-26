@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Device } from '../device';
+import { Device } from '../data-model';
 import { DeviceService } from '../device.service';
 
 @Component({
