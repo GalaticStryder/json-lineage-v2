@@ -1,10 +1,8 @@
 <div *ngIf="device" class="row">
   <div class="col s12">
-    <h2 *ngIf="device._id">Device Information</h2>
-    <h2 *ngIf="!device._id">New Device</h2>
+    <h4 *ngIf="device._id">Device Information</h4>
+    <h4 *ngIf="!device._id">New Device</h4>
   </div>
-</div>
-<div *ngIf="device" class="row">
   <form class="col s12">
     <div class="form-group">
       <label for="device-name">Name</label>

@@ -1,17 +1,42 @@
+/*
+ * Forms
+ */
 /* Valid: Turquoise Teal */
 .ng-valid[required], .ng-valid.required  {
   border-bottom: 1px solid #00bfa5;
   box-shadow: 0 1px 0 0 #00bfa5;
 }
-
 /* Invalid: Bloody Red */
 .ng-invalid[required], .ng-invalid.required  {
   border-bottom: 1px solid #c62828;
   box-shadow: 0 1px 0 0 #c62828;
 }
-
 /* Untouched: Default Teal */
 .ng-untouched[required], .ng-untouched.required  {
   border-bottom: 1px solid #009688;
   box-shadow: 0 1px 0 0 #009688;
+}
+
+/*
+ * Navigation
+ */
+/* Color: Pink/White */
+nav {
+  color: #fff;
+  background-color: #ad1457;
+}
+/* Logo: Adjusted Size/Padding */
+nav .brand-logo img {
+  border-radius: 2px 0 0 2px;
+  position: relative;
+  display: inline-block;
+  padding: 4px 0;
+  width: 92px;
+  height: auto;
+}
+@media only screen and (min-width: 601px) {
+  nav .brand-logo img {
+    padding: 5px 0;
+    width: 105px;
+  }
 }
