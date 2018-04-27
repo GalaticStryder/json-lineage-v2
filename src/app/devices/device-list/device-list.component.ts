@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Device } from '../data-model';
 import { DeviceService } from '../device.service';
-import { DeviceInformationComponent } from '../device-information/device-information.component';
 
 @Component({
   selector: 'device-list',
@@ -45,8 +44,12 @@ export class DeviceListComponent implements OnInit {
     });
   }
 
+  getDevices() {
+    this.ngOnInit();
+  }
+
   selectDevice(device: Device) {
-    this.selectedDevice = device
+    this.selectedDevice = device;
   }
 
   createNewDevice() {
