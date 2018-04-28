@@ -37,12 +37,20 @@ function handleError(res, reason, message, code) {
 
 /* The following lines apply to devices API routes. */
 
+/*
+ * REDIRECT GLOBAL
+ */
+
 /*  "/api"
  *    GET: redirects to initial page
  */
 app.get('/api', function(req, res) {
   res.redirect('/');
 });
+
+/*
+ * DEVICES API
+ */
 
 /*  "/api/devices"
  *    GET: finds all devices
@@ -106,6 +114,10 @@ app.post("/api/devices", function(req, res) {
   });
 });
 
+/*
+ * DEVICE ID API
+ */
+
 /*  "/api/devices/:id"
  *    GET: finds device via `id`
  *    POST: updates device db (by adding with $push) via `id`
@@ -159,6 +171,46 @@ app.delete("/api/devices/:id", function(req, res) {
     }
   });
 });
+
+/*
+ * UPDATES API
+ */
+
+/*  "/api/devices/:id/updates"
+ *    GET: shows all updates for device `id`
+ */
+app.get("/api/devices/:id/updates", function(req, res) {
+  db.collection(DEVICES_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, data) {
+    if (err) {
+      handleError(res, err.message, "Failed to get device id updates.");
+    } else {
+      // Getting the `count` from the updates on console:
+      var keys = Object.keys(data.updates);
+      var length = keys.length;
+      console.log("This device ID contains " + length + " updates");
+      // This can be removed later on, it's just an example code.
+      res.status(200).json(data.updates);
+    }
+  });
+});
+
+/*  "/api/devices/:id/updates/:number"
+ *    GET: gets update information by `number`
+ */
+app.get("/api/devices/:id/updates/:number", function(req, res) {
+  var number = req.params.number;
+  db.collection(DEVICES_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, data) {
+    if (err) {
+      handleError(res, err.message, "Failed to get update number.");
+    } else {
+      res.status(200).json(data.updates[number]);
+    }
+  });
+});
+
+/*
+ * UPDATER API
+ */
 
 /*  "/api/v1"
  *    GET: finds all devices
