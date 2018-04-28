@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Device } from './data-model';
+import { Device, Update } from './data-model';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DeviceService {
-  private devicesUrl = '/api/devices';
+  private devicesUrl = '/api/devices/';
+  private updatesUrl = '/api/devices/5ae50c46f32a580c71779593/updates';
 
   constructor(private httpClient: HttpClient) { }
 
     // get("/api/devices")
     getDevices(): Promise<Device[]> {
       return this.httpClient.get(this.devicesUrl)
+                 .toPromise()
+                 .catch(this.handleError);
+    }
+
+    getUpdates(): Promise<Update[]> {
+      return this.httpClient.get(this.updatesUrl)
                  .toPromise()
                  .catch(this.handleError);
     }

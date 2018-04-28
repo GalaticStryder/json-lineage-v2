@@ -13,12 +13,10 @@
     <button class="waves-effect waves-light btn" (click)="getDevices()">Refresh</button>
     <button class="waves-effect waves-light btn" (click)="createNewDevice()">New</button>
   </div>
-  <div class="col s12 m5 offset-m2">
-    <device-information
-      [device]="selectedDevice"
-      [createHandler]="addDevice"
-      [updateHandler]="updateDevice"
-      [deleteHandler]="deleteDevice">
-    </device-information>
-  </div>
+  <device-information
+    [device]="selectedDevice"
+    [createHandler]="addDevice"
+    [updateHandler]="updateDevice"
+    [deleteHandler]="deleteDevice">
+  </device-information>
 </div>

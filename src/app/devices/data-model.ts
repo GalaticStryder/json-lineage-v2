@@ -1,16 +1,16 @@
-export class Device {
-  _id? = '';
-  name = '';
-  codename = '';
-  updates: Updates[];
+export interface Device {
+  _id?: string;
+  name: string;
+  codename: string;
+  updates: Update[];
 }
 
-export class Updates {
-  id = '';
-  datetime = '';
-  filename = '';
-  romtype = '';
-  size = '';
-  url = '';
-  version = '';
+export interface Update {
+  id: number;
+  datetime: string;
+  filename: string;
+  romtype: string;
+  size: string;
+  url: string;
+  version: string;
 }

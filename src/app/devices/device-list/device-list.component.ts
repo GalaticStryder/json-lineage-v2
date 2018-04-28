@@ -20,19 +20,6 @@ export class DeviceListComponent implements OnInit {
       .getDevices()
       .then((devices: Device[]) => {
         this.devices = devices.map((device) => {
-          if (!device.updates) {
-            device.updates = [
-              {
-                id: '',
-                datetime: '',
-                filename: '',
-                romtype: '',
-                size: '',
-                url: '',
-                version: ''
-              }
-            ]
-          }
           return device;
         });
       });
@@ -56,17 +43,7 @@ export class DeviceListComponent implements OnInit {
     var device: Device = {
       name: '',
       codename: '',
-      updates: [
-        {
-          id: '',
-          datetime: '',
-          filename: '',
-          romtype: '',
-          size: '',
-          url: '',
-          version: ''
-        }
-      ]
+      updates: []
     };
 
     // By default, a newly-created device will have the selected state.

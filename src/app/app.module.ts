@@ -8,6 +8,7 @@ import { DeviceInformationComponent } from './devices/device-information/device-
 import { DeviceListComponent } from './devices/device-list/device-list.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { UpdateListComponent } from './devices/update-list/update-list.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { HeaderComponent } from './header/header.component';
     DeviceInformationComponent,
     DeviceListComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    UpdateListComponent
   ],
   imports: [
     BrowserModule,
