@@ -178,6 +178,7 @@ app.delete("/api/devices/:id", function(req, res) {
 
 /*  "/api/devices/:id/updates"
  *    GET: shows all updates for device `id`
+ *    POST: publishes new update for device `id`
  */
 app.get("/api/devices/:id/updates", function(req, res) {
   db.collection(DEVICES_COLLECTION).findOne({ _id: new ObjectID(req.params.id) }, function(err, data) {
@@ -190,6 +191,18 @@ app.get("/api/devices/:id/updates", function(req, res) {
       console.log("This device ID contains " + length + " updates");
       // This can be removed later on, it's just an example code.
       res.status(200).json(data.updates);
+    }
+  });
+});
+
+app.post("/api/devices/:id/updates", function(req, res) {
+  /* TODO: Give a unique `id` to updates using mongo's ObjectID. */
+  var updateDoc = req.body;
+  db.collection(DEVICES_COLLECTION).updateOne({_id: new ObjectID(req.params.id)}, { $push: {"updates":updateDoc} }, function(err) {
+    if (err) {
+      handleError(res, err.message, "Failed to update device.");
+    } else {
+      res.status(200).json(updateDoc);
     }
   });
 });
