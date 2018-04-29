@@ -1,0 +1,16 @@
+<div *ngIf="update" class="row">
+  <div class="col s12 m5 offset-m2">
+    <h4>Update Information</h4>
+    <p>Showing information for <i>Update Number</i> <b>#{{ updateNumber }}</b>.</p>
+    <form class="col s12">
+      <div class="form-group">
+        <label for="update-id">ID</label>
+        <input class="form-control" name="update-id" [(ngModel)]="update.id" placeholder="ID" required/>
+        <div class="chip">
+          <b>Required</b>
+          <i class="close material-icons">close</i>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

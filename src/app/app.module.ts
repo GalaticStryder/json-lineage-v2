@@ -9,6 +9,7 @@ import { DeviceListComponent } from './devices/device-list/device-list.component
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { UpdateListComponent } from './devices/update-list/update-list.component';
+import { UpdateInformationComponent } from './devices/update-information/update-information.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UpdateListComponent } from './devices/update-list/update-list.component
     DeviceListComponent,
     FooterComponent,
     HeaderComponent,
-    UpdateListComponent
+    UpdateListComponent,
+    UpdateInformationComponent
   ],
   imports: [
     BrowserModule,

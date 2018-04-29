@@ -2,6 +2,7 @@
   <div *ngIf="device" class="row">
     <div class="col s12">
       <h4 *ngIf="device._id">Device Information</h4>
+      <p *ngIf="device._id">Showing information for <i>Device ID</i> <b>#{{ device._id }}</b>.</p>
       <h4 *ngIf="!device._id">New Device</h4>
     </div>
     <form class="col s12">
