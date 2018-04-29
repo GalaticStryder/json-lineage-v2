@@ -25,7 +25,7 @@ export class DeviceListComponent implements OnInit {
       });
   }
 
-  public getIndexOfDevice = (deviceId: String) => {
+  private getIndexOfDevice = (deviceId: String) => {
     return this.devices.findIndex((device) => {
       return device._id === deviceId;
     });

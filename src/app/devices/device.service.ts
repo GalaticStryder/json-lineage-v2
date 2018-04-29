@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class DeviceService {
-  private devicesUrl = '/api/devices/';
+  private devicesUrl = '/api/devices';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -40,8 +40,8 @@ export class DeviceService {
 
     // get("/api/devices/:id/updates")
     getUpdates(getDeviceId): Promise<Update[]> {
-      console.log(getDeviceId);
-      return this.httpClient.get(this.devicesUrl + getDeviceId + '/updates')
+      console.log('Fetching updates for ' + getDeviceId);
+      return this.httpClient.get(this.devicesUrl + '/' + getDeviceId + '/updates')
         .toPromise()
         .catch(this.handleError);
     }
