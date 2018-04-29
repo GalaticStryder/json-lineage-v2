@@ -19,4 +19,7 @@
     [updateHandler]="updateDevice"
     [deleteHandler]="deleteDevice">
   </device-information>
+  <update-list
+    *ngIf="selectedDevice" [device]="selectedDevice">
+  </update-list>
 </div>

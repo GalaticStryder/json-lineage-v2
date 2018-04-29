@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Update } from '../data-model';
+import { Input, NgModule } from '@angular/core';
+import { Component, OnChanges } from '@angular/core';
+import { Device, Update } from '../data-model';
 import { DeviceService } from '../device.service';
+import { DeviceListComponent } from '../device-list/device-list.component';
 
 @Component({
   selector: 'update-list',
@@ -9,15 +11,24 @@ import { DeviceService } from '../device.service';
   providers: [DeviceService]
 })
 
-export class UpdateListComponent implements OnInit {
-  updates: Update[]
-  selectedUpdate: Update
+@NgModule({
+  declarations: [ DeviceListComponent ]
+})
 
-  constructor(private deviceService: DeviceService) { }
+export class UpdateListComponent implements OnChanges {
+  @Input()
+  device: Device;
 
-  ngOnInit() {
+  updates: Update[];
+  selectedUpdate: Update;
+
+  constructor(private deviceService: DeviceService,
+              private deviceListComponent: DeviceListComponent) { }
+
+  ngOnChanges() {
+    // console.log(this.device._id);
      this.deviceService
-      .getUpdates()
+      .getUpdates(this.device._id)
       .then((updates: Update[]) => {
         this.updates = updates.map((update) => {
           return update;
@@ -26,7 +37,7 @@ export class UpdateListComponent implements OnInit {
   }
 
   getUpdates() {
-    this.ngOnInit();
+    this.ngOnChanges();
   }
 
   selectUpdate(update: Update) {

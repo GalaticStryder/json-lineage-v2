@@ -10,10 +10,10 @@ import { DeviceService } from '../device.service';
 })
 
 export class DeviceListComponent implements OnInit {
-  devices: Device[]
-  selectedDevice: Device
+  devices: Device[];
+  selectedDevice: Device;
 
-  constructor(private deviceService: DeviceService) { }
+  constructor(private deviceService: DeviceService) { console.log('Initializing...'); }
 
   ngOnInit() {
      this.deviceService
@@ -25,7 +25,7 @@ export class DeviceListComponent implements OnInit {
       });
   }
 
-  private getIndexOfDevice = (deviceId: String) => {
+  public getIndexOfDevice = (deviceId: String) => {
     return this.devices.findIndex((device) => {
       return device._id === deviceId;
     });

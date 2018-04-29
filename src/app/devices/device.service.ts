@@ -6,19 +6,12 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class DeviceService {
   private devicesUrl = '/api/devices/';
-  private updatesUrl = '/api/devices/5ae50c46f32a580c71779593/updates';
 
   constructor(private httpClient: HttpClient) { }
 
     // get("/api/devices")
     getDevices(): Promise<Device[]> {
       return this.httpClient.get(this.devicesUrl)
-                 .toPromise()
-                 .catch(this.handleError);
-    }
-
-    getUpdates(): Promise<Update[]> {
-      return this.httpClient.get(this.updatesUrl)
                  .toPromise()
                  .catch(this.handleError);
     }
@@ -43,6 +36,14 @@ export class DeviceService {
       return this.httpClient.put(putUrl, putDevice)
                  .toPromise()
                  .catch(this.handleError);
+    }
+
+    // get("/api/devices/:id/updates")
+    getUpdates(getDeviceId): Promise<Update[]> {
+      console.log(getDeviceId);
+      return this.httpClient.get(this.devicesUrl + getDeviceId + '/updates')
+        .toPromise()
+        .catch(this.handleError);
     }
 
     private handleError (error: any): Promise<any> {
