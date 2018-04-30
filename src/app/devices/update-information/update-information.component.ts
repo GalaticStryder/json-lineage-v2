@@ -1,6 +1,6 @@
-import {Component, Input, Pipe} from '@angular/core';
-import {Update, Device} from '../data-model';
-import {DeviceService} from '../device.service';
+import { Component, Input } from '@angular/core';
+import { Update, Device } from '../data-model';
+import { DeviceService } from '../device.service';
 
 @Component({
   selector: 'update-information',
@@ -16,13 +16,16 @@ export class UpdateInformationComponent {
   device: Device;
 
   @Input()
+  romTypes: any[];
+
+  @Input()
+  romVersions: any[];
+
+  @Input()
   updateNumber: number;
 
   @Input()
   createHandler: Function;
-
-  /* Properties */
-  randomId: number;
 
   constructor(private deviceService: DeviceService) { }
 

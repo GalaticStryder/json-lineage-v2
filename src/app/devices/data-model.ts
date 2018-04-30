@@ -10,7 +10,7 @@ export interface Update {
   datetime: number;
   filename: string;
   romtype: string;
-  size: string;
+  size: number;
   url: string;
   version: string;
 }

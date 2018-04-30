@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Device, Update } from '../data-model';
 import { DeviceService } from '../device.service';
 
@@ -9,7 +9,7 @@ import { DeviceService } from '../device.service';
   providers: [DeviceService]
 })
 
-export class UpdateListComponent implements OnChanges {
+export class UpdateListComponent implements OnChanges, OnInit {
   @Input()
   device: Device;
 
@@ -20,8 +20,14 @@ export class UpdateListComponent implements OnChanges {
   /* Properties */
   randomId: number;
   dateNow: number;
+  romTypes: any[];
+  romVersions: any[];
 
   constructor(private deviceService: DeviceService) { }
+
+  ngOnInit() {
+    this.generateProperties();
+  }
 
   ngOnChanges() {
     /* Don't send HTTP request if ID is not defined. */
@@ -68,6 +74,21 @@ export class UpdateListComponent implements OnChanges {
     var dateNow = Math.floor(Date.now() / 1000);
     this.dateNow = dateNow;
     console.log('Generated timestamp: ' + dateNow);
+    /* ROM Type */
+    var romtypes = [
+      {value: 'unofficial', viewValue: 'Unofficial'},
+      {value: 'release', viewValue: 'Release'},
+      {value: 'nightly', viewValue: 'Nightly'},
+      {value: 'snapshot', viewValue: 'Snapshot'},
+      {value: 'experimental', viewValue: 'Experimental'}
+    ];
+    this.romTypes = romtypes;
+    /* ROM Versions */
+    var romversions = [
+      { value: '15.1' },
+      { value: '14.1' }
+    ];
+    this.romVersions = romversions;
   }
 
   createNewUpdate() {
@@ -77,7 +98,7 @@ export class UpdateListComponent implements OnChanges {
       datetime: this.dateNow,
       filename: '',
       romtype: '',
-      size: '',
+      size: 0,
       url: '',
       version: ''
     };

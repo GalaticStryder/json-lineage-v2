@@ -8,34 +8,40 @@
       <div class="form-group">
         <label for="update-id">ID</label>
         <input class="form-control" name="update-id" [(ngModel)]="update.id" placeholder="ID" disabled/>
-        <div class="chip">
-          <b>Disabled</b>
-          <i class="close material-icons">close</i>
-        </div>
       </div>
     </form>
     <form class="col s12">
       <div class="form-group">
         <label for="update-datetime">Date</label>
         <input class="form-control" name="update-datetime" [(ngModel)]="update.datetime" placeholder="Date" disabled/>
-        <div class="chip">
-          <b>Disabled</b>
-          <i class="close material-icons">close</i>
-        </div>
       </div>
     </form>
-    <!-- TODO: Import mat-select from Angular instead. -->
-    <!--div class="input-field col s12">
-      <select [(ngModel)]="update.romtype">
-        <option [ngValue]="" disabled selected>Choose the build type</option>
-        <option [ngValue]="unofficial">Unofficial</option>
-        <option [ngValue]="release">Release</option>
-        <option [ngValue]="nightly">Nightly</option>
-        <option [ngValue]="snapshot">Snapshot</option>
-        <option [ngValue]="experimental">Experimental</option>
-      </select>
-      <label>ROM Type</label>
-    </div-->
+    <form>
+      <mat-form-field class="col s6">
+        <mat-select name="update-romtype" [(ngModel)]="update.romtype" placeholder="ROM Type" required>
+          <mat-option *ngFor="let type of romTypes" [value]="type.value">
+            {{type.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col s6">
+        <mat-select name="update-version" [(ngModel)]="update.version" placeholder="ROM Version" required>
+          <mat-option *ngFor="let version of romVersions" [value]="version.value">
+            {{version.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <form class="col s12">
+      <div class="form-group">
+        <label for="update-filename">File Name</label>
+        <input class="form-control" name="update-filename" [(ngModel)]="update.filename" placeholder="File Name"/>
+      </div>
+    </form>
+    <form class="col s12">
+      <label for="update-size">Size in <b>bytes</b></label>
+      <mat-slider class="slider-margin" name="update-size" min="1000000" max="1000000000" step="1000000" thumbLabel="true" [(ngModel)]="update.size"></mat-slider>
+    </form>
     <a class="waves-effect waves-light btn" *ngIf="updateNumber === null" (click)="createUpdate(update)"><i class="material-icons right">create</i>Create</a>
   </div>
 </div>
