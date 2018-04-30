@@ -1,7 +1,7 @@
 <div *ngIf="device" class="row">
   <div class="col s12 m5">
     <h4>Updates</h4>
-    <p>A collection with all the updates for the selected <i>Device ID</i> {{ device._id }}.</p>
+    <p>A collection with all the updates for the selected <i>Device ID</i>.</p>
     <ul class="collection">
       <li class="collection-item"
         *ngFor="let update of updates"
@@ -11,7 +11,7 @@
       </li>
     </ul>
     <button class="waves-effect waves-light btn" (click)="getUpdates(device)">Refresh</button>
-    <button class="waves-effect waves-light btn" (click)="createNewUpdate(update)">New</button>
+    <button class="waves-effect waves-light btn" (click)="createNewUpdate()">New</button>
   </div>
   <update-information
     *ngIf="selectedUpdate" [update]="selectedUpdate"

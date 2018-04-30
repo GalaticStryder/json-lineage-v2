@@ -1,9 +1,9 @@
 <div *ngIf="update" class="row">
   <div class="col s12 m5 offset-m2">
-    <h4 *ngIf="updateNumber">Update Information</h4>
-    <p *ngIf="updateNumber">Showing information for <i>Update Number</i> <b>#{{ updateNumber }}</b>.</p>
-    <h4 *ngIf="!updateNumber">New Update</h4>
-    <p *ngIf="!updateNumber">Creating new update for <i>Device ID</i> <b>#{{ device._id }}</b>.</p>
+    <h4 *ngIf="updateNumber !== null">Update Information</h4>
+    <p *ngIf="updateNumber !== null">Showing information for <i>Update Number</i> <b>#{{ updateNumber }}</b>.</p>
+    <h4 *ngIf="updateNumber === null">New Update</h4>
+    <p *ngIf="updateNumber === null">Creating new update for <i>Device ID</i> <b>#{{ device._id }}</b>.</p>
     <form class="col s12">
       <div class="form-group">
         <label for="update-id">ID</label>
@@ -14,6 +14,6 @@
         </div>
       </div>
     </form>
-    <a class="waves-effect waves-light btn" *ngIf="!updateNumber" (click)="createUpdate(update)"><i class="material-icons right">create</i>Create</a>
+    <a class="waves-effect waves-light btn" *ngIf="updateNumber === null" (click)="createUpdate(update)"><i class="material-icons right">create</i>Create</a>
   </div>
 </div>

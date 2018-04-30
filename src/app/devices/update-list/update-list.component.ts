@@ -80,6 +80,9 @@ export class UpdateListComponent implements OnChanges {
     console.log('Creating new update:');
     console.log(update);
 
+    // By default, the update number shall be null during creation.
+    this.updateNumber = null;
+
     // By default, a newly-created update will have the selected state.
     this.selectUpdate(update);
   }

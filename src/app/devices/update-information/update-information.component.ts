@@ -31,5 +31,4 @@ export class UpdateInformationComponent {
       this.createHandler(newUpdate);
     });
   }
-
 }
