@@ -7,13 +7,35 @@
     <form class="col s12">
       <div class="form-group">
         <label for="update-id">ID</label>
-        <input class="form-control" name="update-id" [(ngModel)]="update.id" placeholder="ID" required/>
+        <input class="form-control" name="update-id" [(ngModel)]="update.id" placeholder="ID" disabled/>
         <div class="chip">
-          <b>Required</b>
+          <b>Disabled</b>
           <i class="close material-icons">close</i>
         </div>
       </div>
     </form>
+    <form class="col s12">
+      <div class="form-group">
+        <label for="update-datetime">Date</label>
+        <input class="form-control" name="update-datetime" [(ngModel)]="update.datetime" placeholder="Date" disabled/>
+        <div class="chip">
+          <b>Disabled</b>
+          <i class="close material-icons">close</i>
+        </div>
+      </div>
+    </form>
+    <!-- TODO: Import mat-select from Angular instead. -->
+    <!--div class="input-field col s12">
+      <select [(ngModel)]="update.romtype">
+        <option [ngValue]="" disabled selected>Choose the build type</option>
+        <option [ngValue]="unofficial">Unofficial</option>
+        <option [ngValue]="release">Release</option>
+        <option [ngValue]="nightly">Nightly</option>
+        <option [ngValue]="snapshot">Snapshot</option>
+        <option [ngValue]="experimental">Experimental</option>
+      </select>
+      <label>ROM Type</label>
+    </div-->
     <a class="waves-effect waves-light btn" *ngIf="updateNumber === null" (click)="createUpdate(update)"><i class="material-icons right">create</i>Create</a>
   </div>
 </div>

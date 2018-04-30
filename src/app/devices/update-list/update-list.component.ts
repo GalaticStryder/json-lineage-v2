@@ -19,6 +19,7 @@ export class UpdateListComponent implements OnChanges {
 
   /* Properties */
   randomId: number;
+  dateNow: number;
 
   constructor(private deviceService: DeviceService) { }
 
@@ -63,13 +64,17 @@ export class UpdateListComponent implements OnChanges {
     var ramdomId = Math.floor(100000 + Math.random() * 900000);
     this.randomId = ramdomId;
     console.log('Generated hash: ' + ramdomId);
+    /* Timestamp */
+    var dateNow = Math.floor(Date.now() / 1000);
+    this.dateNow = dateNow;
+    console.log('Generated timestamp: ' + dateNow);
   }
 
   createNewUpdate() {
     this.generateProperties();
     var update: Update = {
       id: this.randomId,
-      datetime: '',
+      datetime: this.dateNow,
       filename: '',
       romtype: '',
       size: '',

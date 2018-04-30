@@ -7,7 +7,7 @@ export interface Device {
 
 export interface Update {
   id: number;
-  datetime: string;
+  datetime: number;
   filename: string;
   romtype: string;
   size: string;
