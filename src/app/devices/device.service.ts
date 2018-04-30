@@ -46,6 +46,13 @@ export class DeviceService {
         .catch(this.handleError);
     }
 
+    createUpdate(getDeviceId, newUpdate: Update): Promise<Update> {
+      console.log('Posting updates for ' + getDeviceId);
+      return this.httpClient.post(this.devicesUrl + '/' + getDeviceId + '/updates', newUpdate)
+                 .toPromise()
+                 .catch(this.handleError);
+    }
+
     private handleError (error: any): Promise<any> {
       let errMsg = (error.message) ? error.message :
       error.status ? `${error.status} - ${error.statusText}` : 'Internal server error!';

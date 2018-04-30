@@ -17,6 +17,9 @@ export class UpdateListComponent implements OnChanges {
   selectedUpdate: Update;
   updateNumber: number;
 
+  /* Properties */
+  randomId: number;
+
   constructor(private deviceService: DeviceService) { }
 
   ngOnChanges() {
@@ -53,5 +56,37 @@ export class UpdateListComponent implements OnChanges {
       console.log('Update index is at ' + idx);
       this.updateNumber = idx;
     }
+  }
+
+  generateProperties() {
+    /* ID */
+    var ramdomId = Math.floor(100000 + Math.random() * 900000);
+    this.randomId = ramdomId;
+    console.log('Generated hash: ' + ramdomId);
+  }
+
+  createNewUpdate() {
+    this.generateProperties();
+    var update: Update = {
+      id: this.randomId,
+      datetime: '',
+      filename: '',
+      romtype: '',
+      size: '',
+      url: '',
+      version: ''
+    };
+
+    console.log('Creating new update:');
+    console.log(update);
+
+    // By default, a newly-created update will have the selected state.
+    this.selectUpdate(update);
+  }
+
+  addUpdate = (update: Update) => {
+    this.updates.push(update);
+    this.selectUpdate(update);
+    return this.updates;
   }
 }

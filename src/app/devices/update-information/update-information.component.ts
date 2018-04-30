@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {Update} from '../data-model';
+import {Component, Input, Pipe} from '@angular/core';
+import {Update, Device} from '../data-model';
 import {DeviceService} from '../device.service';
 
 @Component({
@@ -13,8 +13,23 @@ export class UpdateInformationComponent {
   update: Update;
 
   @Input()
+  device: Device;
+
+  @Input()
   updateNumber: number;
 
+  @Input()
+  createHandler: Function;
+
+  /* Properties */
+  randomId: number;
+
   constructor(private deviceService: DeviceService) { }
+
+  createUpdate(update: Update) {
+    this.deviceService.createUpdate(this.device._id, update).then((newUpdate: Update) => {
+      this.createHandler(newUpdate);
+    });
+  }
 
 }
