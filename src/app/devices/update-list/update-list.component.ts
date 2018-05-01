@@ -5,8 +5,7 @@ import { DeviceService } from '../device.service';
 @Component({
   selector: 'update-list',
   templateUrl: './update-list.component.html',
-  styleUrls: ['./update-list.component.css'],
-  providers: [DeviceService]
+  styleUrls: ['./update-list.component.css']
 })
 
 export class UpdateListComponent implements OnChanges, OnInit {
