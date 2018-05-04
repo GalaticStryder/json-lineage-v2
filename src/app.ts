@@ -248,4 +248,36 @@ app.get('/api/v1/:codename', function(req, res) {
   });
 });
 
+/* Helper to check if ROM type is in the scope. */
+const romtypes = [
+  'unofficial',
+  'release',
+  'nightly',
+  'snapshot',
+  'experimental'
+];
+
+/*  "/api/v1/:codename/:romtype"
+ *    GET: finds device via `codename` and parses updater ROM `type` response
+ */
+app.get('/api/v1/:codename/:romtype', function(req, res) {
+  /* ROM type is a ghost property, but we still check if it's in the scope. */
+  const romtype = req.params.romtype;
+  if (!romtypes.includes(romtype)) {
+    handleError(res, 'Wanted ROM type does not exist.', 'You need to pick one of the following: ' + romtypes, 400);
+  } else {
+    db.collection(DEVICES_COLLECTION).findOne({ codename: (req.params.codename) }, function(err, doc) {
+      if (err) {
+        handleError(res, err.message, 'Failed to get device codename.', 400);
+      } else {
+        /* The updater will handle the ROM type, we'll show all types regardless. */
+        console.log('Getting updates for ' + romtype + ' ROM type...');
+        doc.response = doc.updates;
+        delete doc.updates;
+        res.status(200).json(doc);
+      }
+    });
+  }
+});
+
 export default app;
