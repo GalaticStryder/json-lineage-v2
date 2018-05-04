@@ -26,12 +26,21 @@ export class UpdateInformationComponent {
 
   @Input()
   createHandler: Function;
+  @Input()
+  deleteHandler: Function;
 
   constructor(private deviceService: DeviceService) { }
 
   createUpdate(update: Update) {
     this.deviceService.createUpdate(this.device._id, update).then((newUpdate: Update) => {
       this.createHandler(newUpdate);
+    });
+  }
+
+  deleteUpdate(updateNumber: Number): void {
+    const updateId = this.update.id;
+    this.deviceService.deleteUpdate(this.device._id, updateNumber.toString()).then((deletedUpdateString: String) => {
+      this.deleteHandler(deletedUpdateString, updateId);
     });
   }
 }

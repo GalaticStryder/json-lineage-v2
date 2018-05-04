@@ -1,8 +1,4 @@
-/* Material Slider */
-.slider-margin {
-  margin: 10px;
-}
-
+/* Slider Size */
 .mat-slider-horizontal {
-  width: 300px;
+  width: 200px;
 }

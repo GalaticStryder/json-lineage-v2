@@ -51,14 +51,14 @@ export class UpdateListComponent implements OnChanges, OnInit {
     this.selectedUpdateCount(update);
   }
 
-  private getIndexOfUpdate = (updateId: Number) => {
+  private getIndexOfUpdate = (updateId: any) => {
     return this.updates.findIndex((update) => {
       return update.id === updateId;
     });
   }
 
   selectedUpdateCount(update: Update) {
-    var idx = this.getIndexOfUpdate(update.id);
+    const idx = this.getIndexOfUpdate(update.id);
     if (idx !== -1) {
       console.log('Update index is at ' + idx);
       this.updateNumber = idx;
@@ -67,15 +67,15 @@ export class UpdateListComponent implements OnChanges, OnInit {
 
   generateProperties() {
     /* ID */
-    var ramdomId = Math.floor(100000 + Math.random() * 900000);
+    const ramdomId = Math.floor(100000 + Math.random() * 900000);
     this.randomId = ramdomId;
     console.log('Generated hash: ' + ramdomId);
     /* Timestamp */
-    var dateNow = Math.floor(Date.now() / 1000);
+    const dateNow = Math.floor(Date.now() / 1000);
     this.dateNow = dateNow;
     console.log('Generated timestamp: ' + dateNow);
     /* ROM Type */
-    var romtypes = [
+    const romtypes = [
       {value: 'unofficial', viewValue: 'Unofficial'},
       {value: 'release', viewValue: 'Release'},
       {value: 'nightly', viewValue: 'Nightly'},
@@ -84,7 +84,7 @@ export class UpdateListComponent implements OnChanges, OnInit {
     ];
     this.romTypes = romtypes;
     /* ROM Versions */
-    var romversions = [
+    const romversions = [
       { value: '15.1' },
       { value: '14.1' }
     ];
@@ -93,7 +93,7 @@ export class UpdateListComponent implements OnChanges, OnInit {
 
   createNewUpdate() {
     this.generateProperties();
-    var update: Update = {
+    const update: Update = {
       id: this.randomId,
       datetime: this.dateNow,
       filename: '',
@@ -116,6 +116,16 @@ export class UpdateListComponent implements OnChanges, OnInit {
   addUpdate = (update: Update) => {
     this.updates.push(update);
     this.selectUpdate(update);
+    return this.updates;
+  }
+
+  deleteUpdate = (delUpdateString: String, delUpdateId: String) => {
+    console.log('Removing ID ' + delUpdateString + ', regenerating...');
+    const idx = this.getIndexOfUpdate(delUpdateId);
+    if (idx !== -1) {
+      this.updates.splice(idx, 1);
+      this.updateNumber = null;
+    }
     return this.updates;
   }
 }

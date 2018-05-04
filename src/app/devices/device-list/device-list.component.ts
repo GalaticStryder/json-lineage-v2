@@ -40,7 +40,7 @@ export class DeviceListComponent implements OnInit {
   }
 
   createNewDevice() {
-    var device: Device = {
+    const device: Device = {
       name: '',
       codename: '',
       updates: []
@@ -51,7 +51,7 @@ export class DeviceListComponent implements OnInit {
   }
 
   deleteDevice = (deviceId: String) => {
-    var idx = this.getIndexOfDevice(deviceId);
+    const idx = this.getIndexOfDevice(deviceId);
     if (idx !== -1) {
       this.devices.splice(idx, 1);
       this.selectDevice(null);
@@ -66,7 +66,7 @@ export class DeviceListComponent implements OnInit {
   }
 
   updateDevice = (device: Device) => {
-    var idx = this.getIndexOfDevice(device._id);
+    const idx = this.getIndexOfDevice(device._id);
     if (idx !== -1) {
       this.devices[idx] = device;
       this.selectDevice(device);

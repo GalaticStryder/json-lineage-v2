@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppComponent } from './app.component';
 import { DeviceInformationComponent } from './devices/device-information/device-information.component';
@@ -33,7 +34,8 @@ import { UpdateInformationComponent } from './devices/update-information/update-
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatSliderModule
+    MatSliderModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

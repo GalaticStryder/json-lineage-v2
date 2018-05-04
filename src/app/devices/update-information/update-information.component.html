@@ -36,12 +36,14 @@
       <div class="form-group">
         <label for="update-filename">File Name</label>
         <input class="form-control" name="update-filename" [(ngModel)]="update.filename" placeholder="File Name"/>
+        <label for="update-url">File URL</label>
+        <input class="form-control" name="update-url" [(ngModel)]="update.url" placeholder="File URL"/>
+        <label for="update-size">File Size: <b>{{update.size/1000000}} MB</b></label>
+        <mat-slider class="slider-margin" name="update-size" min="1000000" max="1000000000" step="500000" [(ngModel)]="update.size"></mat-slider>
+        <!-- TODO: Add thumbLabel format -->
       </div>
     </form>
-    <form class="col s12">
-      <label for="update-size">Size in <b>bytes</b></label>
-      <mat-slider class="slider-margin" name="update-size" min="1000000" max="1000000000" step="1000000" thumbLabel="true" [(ngModel)]="update.size"></mat-slider>
-    </form>
     <a class="waves-effect waves-light btn" *ngIf="updateNumber === null" (click)="createUpdate(update)"><i class="material-icons right">create</i>Create</a>
+    <a class="waves-effect waves-light btn red" *ngIf="updateNumber !== null" (click)="deleteUpdate(updateNumber)"><i class="material-icons left">delete</i>Delete</a>
   </div>
 </div>

@@ -31,7 +31,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || 'mongodb://localhost:2701
 
 // Generic error handler used by all endpoints.
 function handleError(res, reason, message, code) {
-  console.log('ERROR: ' + reason);
+  console.log('ERROR:', reason);
   res.status(code || 500).json({'error': message});
 }
 
@@ -78,38 +78,12 @@ app.post('/api/devices', function(req, res) {
     handleError(res, 'Invalid device codename input.', 'You must provide a device codename.', 400);
   }
 
-  db.collection(DEVICES_COLLECTION).count(function (err, count) {
+  console.log('Creating new device with codename ' + req.body.codename + '...');
+  db.collection(DEVICES_COLLECTION).insertOne(newDevice, function (err, document) {
     if (err) {
-      handleError(res, err.message, 'Something went wrong...', 400);
-    }
-    if (count === 0) {
-      console.log('Creating initial device with codename ' + req.body.codename + '...');
-      db.collection(DEVICES_COLLECTION).insertOne(newDevice, function (error, doc) {
-        if (error) {
-          handleError(res, err.message, 'Failed to create initial device.', 400);
-        } else {
-          res.status(201).json(doc.ops[0]);
-        }
-      });
+      handleError(res, err.message, 'Failed to create new device.', 400);
     } else {
-      db.collection(DEVICES_COLLECTION).findOne({ codename: {$ne: null} }, function(doc) {
-        // Any new codename must be unique to feed the `v1` API only once.
-        if (doc.codename === req.body.codename) {
-          console.log('This device codename is already set here:');
-          console.log(doc);
-          // This won't be an error, the user can modify the codename to a valid one.
-          // TODO: Add UI callback to show the codename is already in db.
-        } else {
-          console.log('Creating new device with codename ' + req.body.codename + '...');
-          db.collection(DEVICES_COLLECTION).insertOne(newDevice, function (error, document) {
-            if (error) {
-              handleError(res, err.message, 'Failed to create new device.', 400);
-            } else {
-              res.status(201).json(document.ops[0]);
-            }
-          });
-        }
-      });
+      res.status(201).json(document.ops[0]);
     }
   });
 });
@@ -209,6 +183,8 @@ app.post('/api/devices/:id/updates', function(req, res) {
 
 /*  "/api/devices/:id/updates/:number"
  *    GET: gets update information by `number`
+ *    DELETE: deletes update by `number
+ *    TODO: PUT: { $set: {['updates.' + number]: {id: 'xxx', deleteDate: date}
  */
 app.get('/api/devices/:id/updates/:number', function(req, res) {
   const number = req.params.number;
@@ -217,6 +193,27 @@ app.get('/api/devices/:id/updates/:number', function(req, res) {
       handleError(res, err.message, 'Failed to get update number.', 400);
     } else {
       res.status(200).json(data.updates[number]);
+    }
+  });
+});
+
+// Workaround based off: https://stackoverflow.com/questions/4588303
+app.delete('/api/devices/:id/updates/:number', function(req, res) {
+  const number = req.params.number;
+  console.log('Getting rid of update number', number);
+  db.collection(DEVICES_COLLECTION).updateOne({_id: new ObjectID(req.params.id)},
+    { $unset: {['updates.' + number]: true }}, function(err) {
+    if (err) {
+      handleError(res, err.message, 'Failed to delete (unset) update.', 400);
+    } else {
+      db.collection(DEVICES_COLLECTION).updateOne({_id: new ObjectID(req.params.id)},
+        { $pull: {['updates']: null }}, function(error) {
+        if (error) {
+          handleError(res, error.message, 'Failed to delete (pull) update.', 400);
+        } else {
+          res.status(200).json(req.params.id + '/' + number);
+        }
+      });
     }
   });
 });
